@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             // Redirect ke halaman login dengan pesan sukses
-            header("Location: ./../../view/pages/login.php?message=Registrasi Berhasil, Silakan Login");
+            header("Location: /aplikasi-manajemen-donasi/view/pages/login.php?message=Registrasi Berhasil, Silakan Login");
             exit();
         } else {
             echo "Terjadi kesalahan saat registrasi. Silakan coba lagi.";

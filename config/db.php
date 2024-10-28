@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $password = "";
-$database = "aplikasi-manajemen-donasi";
+$database = "aplikasi_manajemen_donasi";
 
 // Membuat koneksi
 $conn = mysqli_connect($host, $user, $password, $database);
