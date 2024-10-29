@@ -71,6 +71,15 @@
             font-size: 2rem;
             animation: fadeInDown 1s ease;
         }
+        .signup-container .form-group input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #fff;
+            margin-bottom: 30px;
+            outline: none;
+            background: transparent;
+        }
         .form-group label {
             color: #cccccc;
             font-size: 0.9rem;
@@ -112,17 +121,24 @@
             font-size: 0.8rem;
             color: #aaaaaa;
         }
-        .password-container {
-            position: relative;
-        }
         .toggle-password {
             position: absolute;
-            right: 10px;
-            top: 60%;
+            right: 20px;
+            top: 65%;
             transform: translateY(-50%);
             color: #aaaaaa;
             cursor: pointer;
+            font-size: 1.2rem;
+            line-height: 1;
         }
+
+        /* Media query untuk tampilan desktop */
+        @media (min-width: 992px) {
+        .toggle-password {
+            top: 64%; /* Menyesuaikan posisi ikon di desktop */
+            right: 40px;
+        }
+    }
 
         /* Responsif untuk layar dengan lebar kurang dari 768px (mobile) */
         @media (max-width: 768px) {
@@ -140,6 +156,15 @@
             }
             h2 {
                 font-size: 1.8rem;
+            }
+            .signup-container .form-group input {
+                width: 100%;
+                padding: 10px 0;
+                font-size: 16px;
+                color: #fff;
+                margin-bottom: 30px;
+                outline: none;
+                background: transparent;
             }
             .form-group {
                 display: flex;
