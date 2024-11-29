@@ -1,0 +1,15 @@
+/* Navbar Styles */
+.navbar {
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.navbar-brand img {
+    height: 35px;
+}
+
+/* Efek Fade-In pada Navbar */
+.navbar {
+    animation: fadeIn 1s ease-in-out;
+    }
