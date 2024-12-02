@@ -29,6 +29,15 @@ $result_pilihan = $conn->query($query_pilihan);
     <link href="../aplikasi-manajemen-donasi/assets/design/icon_section.css" rel="stylesheet">
     <link href="../aplikasi-manajemen-donasi/assets/design/footer.css" rel="stylesheet">
 </head>
+<style>
+    .card-img-top {
+    width: 100%; /* Memastikan gambar memenuhi lebar kartu */
+    height: 200px; /* Atur tinggi gambar */
+    object-fit: cover; /* Memotong gambar secara proporsional */
+    border-radius: 4px; /* Opsional: Tambahkan efek melengkung */
+}
+
+</style>
 
 <body>
     <!-- Sertakan Navbar -->
@@ -49,8 +58,10 @@ $result_pilihan = $conn->query($query_pilihan);
         <div class="card p-3">
             <h3>Campaign Darurat</h3>
             <div class="row">
-                <?php while ($row = $result_darurat->fetch_assoc()): ?>
-                    <div class="col-md-4 mb-4">
+            <?php while ($row = $result_darurat->fetch_assoc()): ?>
+                <div class="col-md-4 mb-4">
+                    <!-- Tambahkan tautan di seluruh card -->
+                    <a href="../aplikasi-manajemen-donasi/view/user/detil_donation.php?id=<?php echo $row['id']; ?>" class="text-decoration-none text-dark">
                         <div class="card">
                             <img alt="Campaign Image" class="card-img-top" src="../aplikasi-manajemen-donasi/uploads/<?php echo htmlspecialchars($row['image']); ?>" />
                             <div class="card-body">
@@ -85,13 +96,11 @@ $result_pilihan = $conn->query($query_pilihan);
                                         }
                                     ?>
                                 </p>
-                                <a href="../aplikasi-manajemen-donasi/view/user/detil_donation.php?id=<?php echo $row['id']; ?>" class="btn btn-primary w-100 mt-3">
-                                    Lihat Rincian
-                                </a>
                             </div>
                         </div>
-                    </div>
-                <?php endwhile; ?>
+                    </a>
+                </div>
+            <?php endwhile; ?>
             </div>
         </div>
     </div>
@@ -101,8 +110,10 @@ $result_pilihan = $conn->query($query_pilihan);
         <div class="card p-3">
             <h3>Campaign Pilihan</h3>
             <div class="row">
-                <?php while ($row = $result_pilihan->fetch_assoc()): ?>
-                    <div class="col-md-4 mb-4">
+            <?php while ($row = $result_pilihan->fetch_assoc()): ?>
+                <div class="col-md-4 mb-4">
+                    <!-- Tambahkan tautan di seluruh card -->
+                    <a href="../aplikasi-manajemen-donasi/view/user/detil_donation.php?id=<?php echo $row['id']; ?>" class="text-decoration-none text-dark">
                         <div class="card">
                             <img alt="Campaign Image" class="card-img-top" src="../aplikasi-manajemen-donasi/uploads/<?php echo htmlspecialchars($row['image']); ?>" />
                             <div class="card-body">
@@ -137,13 +148,11 @@ $result_pilihan = $conn->query($query_pilihan);
                                         }
                                     ?>
                                 </p>
-                                <a href="../aplikasi-manajemen-donasi/view/user/detil_donation.php?id=<?php echo $row['id']; ?>" class="btn btn-primary w-100 mt-3">
-                                    Lihat Rincian
-                                </a>
                             </div>
                         </div>
-                    </div>
-                <?php endwhile; ?>
+                    </a>
+                </div>
+            <?php endwhile; ?>
             </div>
         </div>
     </div>
