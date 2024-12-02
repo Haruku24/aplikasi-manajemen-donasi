@@ -1,6 +1,10 @@
 body {
     background-color: #f0f8ff;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
+
 .campaign-container {
     max-width: 750px;
     margin: 20px auto;
@@ -9,13 +13,20 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     overflow: hidden;
 }
+
 .campaign-header {
     position: relative;
+    margin-bottom: 15px;
 }
+
 .campaign-header img {
     width: 100%;
-    height: 70%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .campaign-header .back-button {
     position: absolute;
     top: 10px;
@@ -23,7 +34,13 @@ body {
     background-color: rgba(255, 255, 255, 0.7);
     border-radius: 50%;
     padding: 5px;
+    transition: transform 0.2s ease;
 }
+
+.campaign-header .back-button:hover {
+    transform: scale(1.1);
+}
+
 .campaign-header .user-info {
     position: absolute;
     bottom: 10px;
@@ -34,12 +51,14 @@ body {
     display: flex;
     align-items: center;
 }
+
 .campaign-header .user-info img {
     width: 30px;
     height: 30px;
     border-radius: 50%;
     margin-right: 5px;
 }
+
 .campaign-header .language-selector {
     position: absolute;
     bottom: 10px;
@@ -50,109 +69,100 @@ body {
     display: flex;
     align-items: center;
 }
+
 .campaign-header .language-selector img {
     width: 20px;
     height: 20px;
     margin-right: 5px;
 }
+
 .campaign-body {
     padding: 20px;
 }
+
 .campaign-body .verified {
     color: #007bff;
     display: flex;
     align-items: center;
     margin-bottom: 10px;
 }
+
 .campaign-body .verified i {
     margin-right: 5px;
 }
+
 .campaign-body .title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
 }
+
 .campaign-body .author {
     color: #6c757d;
     margin-bottom: 20px;
 }
+
 .campaign-body .stats {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
 }
+
 .campaign-body .progress {
     height: 10px;
     margin-bottom: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
 }
+
+.campaign-body .progress .progress-bar {
+    background-color: #007bff;
+    height: 100%;
+}
+
 .campaign-body .amounts {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
 }
-.campaign-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    border-top: 1px solid #e9ecef;
-}
-.campaign-footer .share-button {
-    background-color: #fff;
-    border: 1px solid #007bff;
-    color: #007bff;
-    border-radius: 20px;
-    padding: 5px 20px;
-}
-.campaign-footer .donate-button {
-    background-color: #ff5a5f;
-    color: #fff;
-    border-radius: 20px;
-    padding: 5px 20px;
-    flex-grow: 1;
-    margin-left: 10px;
-}
-.whatsapp-button {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25d366;
-    color: #fff;
-    border-radius: 50%;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.nav-tabs .nav-link.active {
-    color: #007bff;
-    background-color: #ffffff;
-    border-color: #dee2e6 #dee2e6 #ffffff;
-}
-.nav-tabs .nav-link {
-    color: #6c757d;
-}
-.card {
-    border: none;
-    background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-.card-header {
-    background-color: #ffffff;
-    border-bottom: none;
-    font-weight: bold;
-    font-size: 1.25rem;
-}
-.btn-outline-primary {
-    color: #007bff;
-    border-color: #007bff;
-}
-.btn-outline-primary:hover {
-    color: #ffffff;
-    background-color: #007bff;
-    border-color: #007bff;
-}
-.text-center {
+
+.action-buttons {
     text-align: center;
+    margin-top: 20px;
 }
+
+.action-buttons a {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.action-buttons a.btn-primary {
+    background-color: #ff5a5f;
+    color: white;
+    border: none;
+}
+
+.action-buttons a.btn-primary:hover {
+    background-color: #e04a50;
+    transform: scale(1.05);
+}
+
+.action-buttons a.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+.action-buttons a.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: scale(1.05);
+}
+
 .donor-list {
     max-width: 685px;
     margin: 20px auto;
@@ -161,15 +171,18 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .donor-item {
     display: flex;
     align-items: center;
     padding: 10px 0;
     border-bottom: 1px solid #e0e0e0;
 }
+
 .donor-item:last-child {
     border-bottom: none;
 }
+
 .donor-avatar {
     width: 50px;
     height: 50px;
@@ -180,40 +193,34 @@ body {
     justify-content: center;
     margin-right: 15px;
 }
+
 .donor-avatar img {
-    width: 30px;
-    height: 30px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 .donor-info {
     flex-grow: 1;
 }
+
 .donor-name {
     font-weight: bold;
     color: #007bff;
 }
+
 .donor-time {
     color: #6c757d;
     font-size: 0.9em;
 }
+
 .donor-amount {
     color: #28a745;
     font-weight: bold;
 }
-.load-more {
-    text-align: center;
-    margin-top: 20px;
-}
-.load-more button {
-    background-color: #007bff;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-.load-more button:hover {
-    background-color: #0056b3;
-}
+
 .report-container {
     background-color: #ffffff;
     padding: 10px;
@@ -225,6 +232,7 @@ body {
     max-width: 685px;
     margin: 20px auto;
 }
+
 .report-button {
     border: 2px solid #ff4d4d;
     color: #ff4d4d;
@@ -235,79 +243,28 @@ body {
     align-items: center;
     text-decoration: none;
 }
+
 .report-button i {
     margin-right: 10px;
 }
-.hidden {
-    display: none;
+
+.load-more {
+    display: flex; /* Gunakan flexbox untuk pemusatan */
+    justify-content: center; /* Pusatkan secara horizontal */
+    margin-top: 20px;
 }
-.footer-text {
-    font-size: 0.875rem;
-    color: #6c757d;
-}
-.footer-text a {
-    color: #007bff;
-    text-decoration: none;
-}
-.footer-text a:hover {
-    text-decoration: underline;
-}
-.whatsapp-icon {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25d366;
-    color: white;
-    border-radius: 50%;
-    padding: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-.additional-card {
+
+.load-more button {
+    background-color: #007bff;
+    color: #ffffff;
     border: none;
-    background-color: #ffffff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
-.additional-card-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-.additional-card-title {
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: #4a4a4a;
-    text-align: left;
-    width: 100%;
-}
-.additional-card-text {
-    color: #7a7a7a;
-}
-.list-group-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: none;
-    padding: 10px 0;
-}
-.list-group-item i {
-    margin-right: 10px;
-    color: #17a2b8;
-}
-.total {
-    background-color: #e9f5ff;
-    font-weight: bold;
-}
-.footer-text {
-    font-size: 0.875rem;
-    color: #6c757d;
-}
-.footer-text a {
-    color: #007bff;
-    text-decoration: none;
-}
-.footer-text a:hover {
-    text-decoration: underline;
+
+.load-more button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Tambahkan sedikit efek hover */
 }
