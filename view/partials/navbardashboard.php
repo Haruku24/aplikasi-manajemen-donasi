@@ -61,11 +61,11 @@
                             <li><hr class="dropdown-divider"></li>
                             <!-- Profile -->
                             <li>
-                                <a class="dropdown-item" href="#">Profil</a>
+                                <a class="dropdown-item" href="../partials/edit_profile.php">Profil</a>
                             </li>
                             <!-- Logout -->
                             <li>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                <a class="dropdown-item" href="../../index.php">Logout</a>
                             </li>
                         </ul>
                     </li>

@@ -40,7 +40,7 @@ if (!$campaign) {
     rel="stylesheet"
   />
   <link
-    href="./../../../../../aplikasi-manajemen-donasi/assets/donation_section/campaign_pasien/cp.css"
+    href="../../assets/user_css/detail_donation.css"
     rel="stylesheet"
   />
 </head>

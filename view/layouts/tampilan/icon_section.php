@@ -10,25 +10,25 @@
     <div class="container mt-3">
         <div class="donation-container">
             <div class="donation-item">
-                <a href="#campaign-inisiatif">
+                <a href="../../../../aplikasi-manajemen-donasi/view/layouts/pilihan_lainnya/pilihan_lainnya.php">
                     <i class="fas fa-bullhorn"></i>
                     <p>Donasi</p>
                 </a>
             </div>
             <div class="donation-item">
-                <a href="#donasi-universal">
+                <a href="../../../../aplikasi-manajemen-donasi/view/layouts/fitur/sedekah.php">
                     <i class="fas fa-hand-holding-heart"></i>
                     <p>Sedekah</p>
                 </a>
             </div>
             <div class="donation-item">
-                <a href="#zakat">
+                <a href="../../../../aplikasi-manajemen-donasi/view/layouts/fitur/zakat.php">
                     <i class="fas fa-box"></i>
                     <p>Zakat</p>
                 </a>
             </div>
             <div class="donation-item">
-                <a href="#donasi-pohon">
+                <a href="../../../../aplikasi-manajemen-donasi/view/layouts/fitur/infaq.php">
                     <i class="fas fa-seedling"></i>
                     <p>Infaq</p>
                 </a>

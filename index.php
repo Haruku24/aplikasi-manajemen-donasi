@@ -23,11 +23,10 @@ $result_pilihan = $conn->query($query_pilihan);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Style CSS -->
     <link href="../aplikasi-manajemen-donasi/assets/design/style.css" rel="stylesheet">
-    <link href="../aplikasi-manajemen-donasi/assets/design/navbar.css" rel="stylesheet">
-    <link href="../aplikasi-manajemen-donasi/assets/design/hero_section.css" rel="stylesheet">
-    <link href="../aplikasi-manajemen-donasi/assets/design/campaig_pasien.css" rel="stylesheet">
-    <link href="../aplikasi-manajemen-donasi/assets/design/icon_section.css" rel="stylesheet">
-    <link href="../aplikasi-manajemen-donasi/assets/design/footer.css" rel="stylesheet">
+    <link href="../aplikasi-manajemen-donasi/assets/partials_css/navbar.css" rel="stylesheet">
+    <link href="../aplikasi-manajemen-donasi/assets/layouts_css/tampilan_css/hero_section.css" rel="stylesheet">
+    <link href="../aplikasi-manajemen-donasi/assets/layouts_css/tampilan_css/icon_section.css" rel="stylesheet">
+    <link href="../aplikasi-manajemen-donasi/assets/layouts_css/tampilan_css/footer.css" rel="stylesheet">
 </head>
 <style>
     .card-img-top {
@@ -156,11 +155,6 @@ $result_pilihan = $conn->query($query_pilihan);
             </div>
         </div>
     </div>
-
-    <!-- WhatsApp Icon -->
-    <a class="whatsapp-icon" href="#">
-        <i class="fab fa-whatsapp"></i>
-    </a>
 
     <!-- Footer -->
     <div>

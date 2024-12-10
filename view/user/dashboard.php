@@ -23,6 +23,10 @@ $result_pilihan = $conn->query($query_pilihan);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Style CSS -->
     <link href="../../assets/design/style.css" rel="stylesheet">
+    <link href="../../assets/partials_css/navbar.css" rel="stylesheet">
+    <link href="../../assets/layouts_css/tampilan_css/hero_section.css" rel="stylesheet">
+    <link href="../../assets/layouts_css/tampilan_css/icon_section.css" rel="stylesheet">
+    <link href="../../assets/layouts_css/tampilan_css/footer.css" rel="stylesheet">
     <link href="../../assets/design/navbar.css" rel="stylesheet">
     <link href="../../assets/design/hero_section.css" rel="stylesheet">
     <link href="../../assets/design/icon_section.css" rel="stylesheet">

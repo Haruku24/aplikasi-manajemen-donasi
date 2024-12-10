@@ -1,11 +1,8 @@
-Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "donasi". Berikut adalah kode yang telah diperbaiki:
-
-```html
 <html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Donasi</title>
+    <title>Infaq</title>
     <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
     <style>
         body {
@@ -25,7 +22,7 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
             max-width: 800px;
             margin: 20px auto;
         }
-        .donasi-button {
+        .infaq-button {
             border: 2px solid #007bff;
             border-radius: 20px;
             padding: 10px 20px;
@@ -35,18 +32,18 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
             margin: 5px;
             cursor: pointer;
         }
-        .donasi-button.active {
+        .infaq-button.active {
             background-color: #007bff;
             color: #ffffff;
         }
-        .donasi-input {
+        .infaq-input {
             border: 1px solid #ced4da;
             border-radius: 10px;
             padding: 10px;
             width: 100%;
             margin-top: 10px;
         }
-        .donasi-minimum {
+        .infaq-minimum {
             color: #6c757d;
             font-size: 0.875rem;
             margin-top: 5px;
@@ -54,20 +51,20 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
         .hidden {
             display: none;
         }
-        .donasi-card {
+        .infaq-card {
             background-color: #e9f3fb;
             border: 1px solid #d1e7f5;
             border-radius: 10px;
             padding: 20px;
             margin: 20px auto;
         }
-        .donasi-card h5 {
+        .infaq-card h5 {
             font-weight: bold;
         }
-        .donasi-card p {
+        .infaq-card p {
             color: #6c757d;
         }
-        .donasi-amount {
+        .infaq-amount {
             font-size: 24px;
             color: #007bff;
             font-weight: bold;
@@ -137,7 +134,7 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
         .toggle-switch input[type="checkbox"]:checked::before {
             transform: translateX(20px);
         }
-        .donasi-section {
+        .infaq-section {
             background-color: #e6f0ff;
             padding: 20px;
             border-radius: 10px;
@@ -196,7 +193,7 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
             color: #666666;
             margin-top: 10px;
         }
-        .donasi-box {
+        .infaq-box {
             background-color: #e9f3fb;
             border: 1px solid #cce0f5;
             border-radius: 8px;
@@ -204,24 +201,24 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
             margin: 20px auto;
             display: none;
         }
-        .donasi-box h5 {
+        .infaq-box h5 {
             font-weight: bold;
         }
-        .donasi-box p {
+        .infaq-box p {
             color: #6c757d;
         }
-        .donasi-box .form-control {
+        .infaq-box .form-control {
             margin-top: 10px;
             margin-bottom: 10px;
         }
-        .donasi-box .form-text {
+        .infaq-box .form-text {
             color: #6c757d;
         }
-        .donasi-box a {
+        .infaq-box a {
             color: #007bff;
             text-decoration: none;
         }
-        .donasi-box a:hover {
+        .infaq-box a:hover {
             text-decoration: underline;
         }
         .form-container {
@@ -247,71 +244,65 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
 <body>
     <div class="container mt-4">
         <div class="card-container d-flex align-items-center mb-3">
-            <a href="../fitur/donasi.php" class="back-arrow"><i class="fas fa-arrow-left"></i></a>
-            <span class="ms-2">Nominal Donasi</span>
+            <a href="../fitur/infaq.php" class="back-arrow"><i class="fas fa-arrow-left"></i></a>
+            <span class="ms-2">Nominal Infaq</span>
         </div>
-        <div class="card-container donasi-container mt-3">
+        <div class="card-container infaq-container mt-3">
             <div class="d-flex flex-wrap">
-                <button class="donasi-button" onclick="selectDonasi(this, 30000)">Rp 30.000</button>
-                <button class="donasi-button" onclick="selectDonasi(this, 50000)">Rp 50.000</button>
-                <button class="donasi-button" onclick="selectDonasi(this, 100000)">Rp 100.000</button>
-                <button class="donasi-button" onclick="selectDonasi(this, true)">Lainnya</button>
+                <button class="infaq-button" onclick="selectInfaq(this, 30000)">Rp 30.000</button>
+                <button class="infaq-button" onclick="selectInfaq(this, 50000)">Rp 50.000</button>
+                <button class="infaq-button" onclick="selectInfaq(this, 100000)">Rp 100.000</button>
+                <button class="infaq-button" onclick="selectInfaq(this, true)">Lainnya</button>
             </div>
-            <div class="mt-3 hidden" id="custom-donasi">
-                <label for="donasi-amount" class="form-label">Isi nominal donasi</label>
-                <input type="text" id="donasi-amount" class="donasi-input" placeholder="">
-                <div class="donasi-minimum">Donasi minimal Rp 1.000</div>
+            <div class="mt-3 hidden" id="custom-infaq">
+                <label for="infaq-amount" class="form-label">Isi nominal infaq</label>
+                <input type="text" id="infaq-amount" class="infaq-input" placeholder="">
+                <div class="infaq-minimum">Infaq minimal Rp 1.000</div>
             </div>
         </div>
-        <div class="card-container donasi-card mt-3" id="slider-section">
+        <div class="card-container infaq-card mt-3" id="slider-section">
             <div class="d-flex justify-content-between align-items-center">
-                <h5>Donasi operasional</h5>
+                <h5>Infaq operasional</h5>
                 <div class="toggle-switch">
                     <input type="checkbox" id="operational-toggle" checked>
                 </div>
             </div>
-            <p>Donasi ini akan digunakan untuk mendukung operasionalisasi Yayasan WeCare.id. Kontribusi Anda akan membantu menopang operasionalisasi organisasi agar dapat membantu lebih banyak orang dan permasalahan sosial lainnya. Donasi ini opsional</p>
+            <p>Infaq ini akan digunakan untuk mendukung operasionalisasi Yayasan WeCare.id. Kontribusi Anda akan membantu menopang operasionalisasi organisasi agar dapat membantu lebih banyak orang dan permasalahan sosial lainnya. Infaq ini opsional</p>
             <div id="operational-details">
-                <div class="donasi-amount" id="donasi-amount-display">Rp 5.000</div>
+                <div class="infaq-amount" id="infaq-amount-display">Rp 5.000</div>
                 <div class="slider-container">
                     <div class="slider-label" id="slider-label">10%</div>
-                    <input type="range" min="0" max="100" value="10" id="donasi-slider">
+                    <input type="range" min="0" max="100" value="10" id="infaq-slider">
                     <div class="d-flex justify-content-between">
                         <span>100%</span>
                     </div>
                 </div>
                 <div class="d-flex justify-content-start mt-3">
                     <div class="custom-amount" id="custom-amount-link">Atau isi nominal sendiri</div>
-            <div class="donation-amount" id="donation-amount-display">Rp 5.000</div>
-            <div class="slider-container">
-                <div class="slider-label" id="slider-label">10%</div>
-                <input type="range" min="0" max="100" value="10" id="donation-slider">
-                <div class="d-flex justify-content-between">
-                    <span>100%</span>
                 </div>
             </div>
         </div>
-        <div class="card-container donasi-box" id="custom-amount-section">
+        <div class="card-container infaq-box" id="custom-amount-section">
             <div class="d-flex justify-content-between align-items-center">
-                <h5>Donasi operasional</h5>
+                <h5>Infaq operasional</h5>
                 <div class="toggle-switch">
                     <input type="checkbox" id="custom-operational-toggle" checked>
                 </div>
             </div>
-            <p>Donasi ini akan digunakan untuk mendukung operasionalisasi Yayasan WeCare.id. Kontribusi Anda akan membantu menopang operasionalisasi organisasi agar dapat membantu lebih banyak orang dan permasalahan sosial lainnya. Donasi ini opsional</p>
+            <p>Infaq ini akan digunakan untuk mendukung operasionalisasi Yayasan WeCare.id. Kontribusi Anda akan membantu menopang operasionalisasi organisasi agar dapat membantu lebih banyak orang dan permasalahan sosial lainnya. Infaq ini opsional</p>
             <input type="text" class="form-control" id="custom-amount-input" placeholder="">
-            <div class="form-text" id="custom-amount-text">Donasi minimal Rp 1.000</div>
+            <div class="form-text" id="custom-amount-text">Infaq minimal Rp 1.000</div>
             <a href="#" id="back-to-slider">Kembali ke slider persentase</a>
         </div>
         <div class="card-container summary-section mt-3">
-            <div class="summary-title">Ringkasan donasi</div>
+            <div class="summary-title">Ringkasan infaq</div>
             <div class="summary-item">
-                <span>Donasi utama</span>
-                <span id="main-donasi">Rp 30.000</span>
+                <span>Infaq utama</span>
+                <span id="main-infaq">Rp 30.000</span>
             </div>
             <div class="summary-item" id="operational-summary">
-                <span>Donasi operasional</span>
-                <span id="operational-donasi">Rp 5.000</span>
+                <span>Infaq operasional</span>
+                <span id="operational-infaq">Rp 5.000</span>
             </div>
             <hr>
             <div class="summary-item total-payment">
@@ -324,9 +315,9 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
             </div>
             <div class="anonymous-checkbox">
                 <input type="checkbox" id="anonymousCheck" checked>
-                <label for="anonymousCheck">Donasi sebagai anonymous</label>
+                <label for="anonymousCheck">Infaq sebagai anonymous</label>
             </div>
-            <div class="note">Untuk donasi di bawah Rp 10.000 hanya dapat menggunakan opsi pembayaran GoPay, OVO, Jenius dan #DompetSehat WeCare.id</div>
+            <div class="note">Untuk infaq di bawah Rp 10.000 hanya dapat menggunakan opsi pembayaran GoPay, OVO, Jenius dan #DompetSehat WeCare.id</div>
         </div>
         <div class="card-container form-container mt-3">
             <h5 class="mb-4">Masukkan identitas kamu</h5>
@@ -350,10 +341,10 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script>
-        const slider = document.getElementById('donasi-slider');
+        const slider = document.getElementById('infaq-slider');
         const sliderLabel = document.getElementById('slider-label');
-        const donasiAmountDisplay = document.getElementById('donasi-amount-display');
-        const operationalDonasi = document.getElementById('operational-donasi');
+        const infaqAmountDisplay = document.getElementById('infaq-amount-display');
+        const operationalInfaq = document.getElementById('operational-infaq');
         const totalPayment = document.getElementById('total-payment');
         const usdAmount = document.getElementById('usd-amount');
         const customAmountLink = document.getElementById('custom-amount-link');
@@ -362,38 +353,38 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
         const customAmountSection = document.getElementById('custom-amount-section');
         const customAmountInput = document.getElementById('custom-amount-input');
         const customAmountText = document.getElementById('custom-amount-text');
-        const mainDonasi = document.getElementById('main-donasi');
-        const donasiButtons = document.querySelectorAll('.donasi-button');
+        const mainInfaq = document.getElementById('main-infaq');
+        const infaqButtons = document.querySelectorAll('.infaq-button');
         const operationalToggle = document.getElementById('operational-toggle');
         const operationalSummary = document.getElementById('operational-summary');
         const operationalDetails = document.getElementById('operational-details');
         const customOperationalToggle = document.getElementById('custom-operational-toggle');
-        const donasiAmountInput = document.getElementById('donasi-amount');
+        const infaqAmountInput = document.getElementById('infaq-amount');
 
-        let mainDonasiAmount = 30000;
+        let mainInfaqAmount = 30000;
         let operationalAmount = 5000;
 
         function updateSummary() {
-            const total = mainDonasiAmount + operationalAmount;
+            const total = mainInfaqAmount + operationalAmount;
             totalPayment.textContent = 'Rp ' + total.toLocaleString('id-ID');
             const usd = (total / 15750).toFixed(2); // Assuming 1 USD = 15750 IDR
             usdAmount.textContent = usd + ' USD';
         }
 
-        function selectDonasi(button, amount) {
+        function selectInfaq(button, amount) {
             // Remove active class from all buttons
-            donasiButtons.forEach(btn => btn.classList.remove('active'));
+            infaqButtons.forEach(btn => btn.classList.remove('active'));
             // Add active class to the clicked button
             button.classList.add('active');
-            // Show or hide the custom donasi input
+            // Show or hide the custom infaq input
             if (amount === true) {
-                document.getElementById('custom-donasi').classList.remove('hidden');
-                mainDonasiAmount = 0;
+                document.getElementById('custom-infaq').classList.remove('hidden');
+                mainInfaqAmount = 0;
             } else {
-                document.getElementById('custom-donasi').classList.add('hidden');
-                mainDonasiAmount = amount;
+                document.getElementById('custom-infaq').classList.add('hidden');
+                mainInfaqAmount = amount;
             }
-            mainDonasi.textContent = 'Rp ' + mainDonasiAmount.toLocaleString('id-ID');
+            mainInfaq.textContent = 'Rp ' + mainInfaqAmount.toLocaleString('id-ID');
             updateSummary();
         }
 
@@ -401,8 +392,8 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
             const percentage = slider.value;
             sliderLabel.textContent = percentage + '%';
             operationalAmount = (percentage / 100) * 50000;
-            donasiAmountDisplay.textContent = 'Rp ' + operationalAmount.toLocaleString('id-ID');
-            operationalDonasi.textContent = 'Rp ' + operationalAmount.toLocaleString('id-ID');
+            infaqAmountDisplay.textContent = 'Rp ' + operationalAmount.toLocaleString('id-ID');
+            operationalInfaq.textContent = 'Rp ' + operationalAmount.toLocaleString('id-ID');
             sliderLabel.style.left = `calc(${percentage}% - 20px)`;
             updateSummary();
         });
@@ -423,18 +414,18 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
                 amount = parseInt(amount, 10);
                 customAmountInput.value = amount.toLocaleString('id-ID');
                 operationalAmount = amount;
-                operationalDonasi.textContent = 'Rp ' + operationalAmount.toLocaleString('id-ID');
+                operationalInfaq.textContent = 'Rp ' + operationalAmount.toLocaleString('id-ID');
                 updateSummary();
             }
         });
 
-        donasiAmountInput.addEventListener('input', function() {
-            let amount = donasiAmountInput.value.replace(/[^0-9]/g, '');
+        infaqAmountInput.addEventListener('input', function() {
+            let amount = infaqAmountInput.value.replace(/[^0-9]/g, '');
             if (amount) {
                 amount = parseInt(amount, 10);
-                donasiAmountInput.value = amount.toLocaleString('id-ID');
-                mainDonasiAmount = amount;
-                mainDonasi.textContent = 'Rp ' + mainDonasiAmount.toLocaleString('id-ID');
+                infaqAmountInput.value = amount.toLocaleString('id-ID');
+                mainInfaqAmount = amount;
+                mainInfaq.textContent = 'Rp ' + mainInfaqAmount.toLocaleString('id-ID');
                 updateSummary();
             }
         });
@@ -443,7 +434,7 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
             if (operationalToggle.checked) {
                 operationalDetails.style.display = 'block';
                 operationalSummary.style.display = 'flex';
-                operationalAmount = parseInt(donasiAmountDisplay.textContent.replace(/[^0-9]/g, ''), 10) || 0;
+                operationalAmount = parseInt(infaqAmountDisplay.textContent.replace(/[^0-9]/g, ''), 10) || 0;
             } else {
                 operationalDetails.style.display = 'none';
                 operationalSummary.style.display = 'none';
