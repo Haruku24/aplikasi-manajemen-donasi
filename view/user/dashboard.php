@@ -27,6 +27,11 @@ $result_pilihan = $conn->query($query_pilihan);
     <link href="../../assets/layouts_css/tampilan_css/hero_section.css" rel="stylesheet">
     <link href="../../assets/layouts_css/tampilan_css/icon_section.css" rel="stylesheet">
     <link href="../../assets/layouts_css/tampilan_css/footer.css" rel="stylesheet">
+    <link href="../../assets/design/navbar.css" rel="stylesheet">
+    <link href="../../assets/design/hero_section.css" rel="stylesheet">
+    <link href="../../assets/design/icon_section.css" rel="stylesheet">
+    <link href="../../assets/design/campaig_pasien.css" rel="stylesheet">
+    <link href="../../assets/design/footer.css" rel="stylesheet">
 </head>
 <style>
     .card-img-top {

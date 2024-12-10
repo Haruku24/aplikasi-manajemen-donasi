@@ -282,6 +282,12 @@ Tentu, saya akan mengganti semua teks yang berkaitan dengan "sedekah" menjadi "d
                 </div>
                 <div class="d-flex justify-content-start mt-3">
                     <div class="custom-amount" id="custom-amount-link">Atau isi nominal sendiri</div>
+            <div class="donation-amount" id="donation-amount-display">Rp 5.000</div>
+            <div class="slider-container">
+                <div class="slider-label" id="slider-label">10%</div>
+                <input type="range" min="0" max="100" value="10" id="donation-slider">
+                <div class="d-flex justify-content-between">
+                    <span>100%</span>
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 30 Nov 2024 pada 07.30
+-- Waktu pembuatan: 18 Nov 2024 pada 04.46
 -- Versi server: 8.0.30
 -- Versi PHP: 8.3.10
 
@@ -50,20 +50,6 @@ CREATE TABLE `donations` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `donation_transactions`
---
-
-CREATE TABLE `donation_transactions` (
-  `id` int NOT NULL,
-  `donation_id` int NOT NULL,
-  `donator_name` varchar(255) NOT NULL,
-  `amount` decimal(15,2) NOT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `infaq`
 --
 
@@ -86,24 +72,23 @@ CREATE TABLE `infaq` (
 
 CREATE TABLE `manage_donations` (
   `id` int NOT NULL,
-  `image` varchar(255) NOT NULL,
-  `description` text NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `description` text,
   `target_amount` decimal(15,2) NOT NULL,
-  `deadline` datetime NOT NULL,
+  `deadline` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `admin_id` int DEFAULT NULL,
   `collected_amount` decimal(15,2) DEFAULT '0.00',
-  `donator_name` varchar(255) DEFAULT NULL,
-  `status_donation` enum('pilihan','darurat') NOT NULL DEFAULT 'pilihan'
+  `status_donation` enum('urgent','biasa') DEFAULT 'biasa'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data untuk tabel `manage_donations`
 --
 
-INSERT INTO `manage_donations` (`id`, `image`, `description`, `target_amount`, `deadline`, `created_at`, `collected_amount`, `donator_name`, `status_donation`) VALUES
-(2, 'adaf20eb-be5c-4f0c-bb24-b40404bedab0.jpeg', 'apa aka', 500000.00, '2024-12-07 00:00:00', '2024-11-29 08:30:01', 0.00, 'abdul', 'darurat'),
-(3, 'GZI7c_SbMAAwI7s.jpeg', 'hiyaaaa', 600000.00, '2024-12-04 00:00:00', '2024-11-29 12:07:02', 0.00, 'joko', 'pilihan'),
-(4, 'GZI7c_TakAAT0E-.jpeg', 'seiklasnya', 400000.00, '2024-12-01 00:00:00', '2024-11-29 14:21:29', 0.00, 'hari', 'darurat');
+INSERT INTO `manage_donations` (`id`, `image`, `description`, `target_amount`, `deadline`, `created_at`, `admin_id`, `collected_amount`, `status_donation`) VALUES
+(2, 'GZI7c_SbMAAwI7s.jpeg', 'ffjgjgcjgcjhk', 500000.00, '2024-11-13', '2024-11-17 16:47:56', NULL, 0.00, 'biasa'),
+(4, 'GZI7c_TakAAT0E-.jpeg', 'apa aja weh', 50000.00, '2024-11-30', '2024-11-18 04:03:44', NULL, 0.00, 'urgent');
 
 -- --------------------------------------------------------
 
@@ -213,13 +198,14 @@ CREATE TABLE `withdrawals` (
 --
 
 CREATE TABLE `zakat` (
-  `id_zakat` int NOT NULL,
-  `nama` varchar(255) NOT NULL,
-  `status` enum('pekerja','non pekerja') NOT NULL,
-  `penghasilan` decimal(15,2) NOT NULL,
-  `jumlah_zakat` decimal(10,2) NOT NULL,
-  `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `zakat_id` int NOT NULL,
+  `jumlah` int NOT NULL,
+  `tanggal` date NOT NULL,
+  `keterangan` text,
+  `nama_donatur` varchar(255) NOT NULL,
+  `status` enum('pending','terverifikasi') DEFAULT 'pending',
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -242,13 +228,6 @@ ALTER TABLE `donations`
   ADD KEY `manage_donation_id` (`manage_donation_id`);
 
 --
--- Indeks untuk tabel `donation_transactions`
---
-ALTER TABLE `donation_transactions`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `donation_id` (`donation_id`);
-
---
 -- Indeks untuk tabel `infaq`
 --
 ALTER TABLE `infaq`
@@ -258,7 +237,8 @@ ALTER TABLE `infaq`
 -- Indeks untuk tabel `manage_donations`
 --
 ALTER TABLE `manage_donations`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_id` (`admin_id`);
 
 --
 -- Indeks untuk tabel `manage_donation_categories`
@@ -305,7 +285,7 @@ ALTER TABLE `withdrawals`
 -- Indeks untuk tabel `zakat`
 --
 ALTER TABLE `zakat`
-  ADD PRIMARY KEY (`id_zakat`);
+  ADD PRIMARY KEY (`zakat_id`);
 
 --
 -- AUTO_INCREMENT untuk tabel yang dibuang
@@ -321,12 +301,6 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT untuk tabel `donations`
 --
 ALTER TABLE `donations`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `donation_transactions`
---
-ALTER TABLE `donation_transactions`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
@@ -375,7 +349,7 @@ ALTER TABLE `withdrawals`
 -- AUTO_INCREMENT untuk tabel `zakat`
 --
 ALTER TABLE `zakat`
-  MODIFY `id_zakat` int NOT NULL AUTO_INCREMENT;
+  MODIFY `zakat_id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -389,10 +363,10 @@ ALTER TABLE `donations`
   ADD CONSTRAINT `donations_ibfk_2` FOREIGN KEY (`manage_donation_id`) REFERENCES `manage_donations` (`id`) ON DELETE CASCADE;
 
 --
--- Ketidakleluasaan untuk tabel `donation_transactions`
+-- Ketidakleluasaan untuk tabel `manage_donations`
 --
-ALTER TABLE `donation_transactions`
-  ADD CONSTRAINT `donation_transactions_ibfk_1` FOREIGN KEY (`donation_id`) REFERENCES `manage_donations` (`id`) ON DELETE CASCADE;
+ALTER TABLE `manage_donations`
+  ADD CONSTRAINT `manage_donations_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `users` (`id`) ON DELETE SET NULL;
 
 --
 -- Ketidakleluasaan untuk tabel `manage_donation_categories`

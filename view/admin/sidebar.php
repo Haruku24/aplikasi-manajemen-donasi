@@ -101,7 +101,7 @@
         <a href="reports.php">Laporan Donasi</a>
         <a href="income.php">Laporan Pemasukan</a>
         <a href="zakat.php">Zakat</a>
-        <a href="#">Settings</a>
+        <a href="#">Penarikan Dana</a>
         <a href="../pages/logout.php">Logout</a>
     </div>
 
