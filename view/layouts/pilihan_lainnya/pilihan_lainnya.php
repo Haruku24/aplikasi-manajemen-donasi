@@ -1,210 +1,292 @@
-<html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>
-   Donasi Pasien
-  </title>
-  <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <style>
-   body {
-            background-color: #f0f8ff;
-            font-family: 'Arial', sans-serif;
+<html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            margin-top: 20px;
+        }
+        .container-custom {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .navbar, .categories, .content {
+            background-color: #ffffff;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
+            transition: box-shadow 0.3s;
+        }
+        .navbar:hover, .categories:hover, .content:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .navbar {
-            background-color: #fff;
-            padding: 1rem;
+            padding: 10px;
+            position: relative;
         }
-        .navbar-brand img {
-            height: 40px;
+        .navbar .logo {
+            width: 100px;
+            height: 50px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            transition: box-shadow 0.3s;
         }
-        .search-bar {
+        .navbar .logo:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .navbar .search-bar {
+            flex-grow: 1;
+            margin: 0 10px;
+            position: relative;
+        }
+        .navbar .search-bar input {
             width: 100%;
-            max-width: 600px;
+            padding: 10px 40px 10px 20px;
+            border-radius: 25px;
+            border: 1px solid #ccc;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
-        .btn-group .btn {
-            margin-right: 10px;
+        .navbar .search-bar input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+        .navbar .search-bar .search-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #ccc;
+        }
+        .navbar .menu-icon {
+            width: 50px;
+            height: 50px;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+        }
+        .navbar .menu-icon:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .dropdown-menu-custom {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 10px;
+            background-color: #ffffff;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        .dropdown-menu-custom.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .dropdown-menu-custom a {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .dropdown-menu-custom a:hover {
+            background-color: #f0f0f0;
+        }
+        .categories {
+            padding: 10px;
+            display: flex;
+            justify-content: flex-start;
+            gap: 10px;   
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+        .categories .category {
+            background-color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            border: 1px solid #8bc34a; /* Matcha green border */
+            color: #8bc34a; /* Matcha green text */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, color 0.3s;
+            display: inline-block;
+        }
+        .categories .category:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .categories .category.active {
+            background-color: #8bc34a; /* Matcha green background */
+            color: #ffffff; /* White text */
         }
         .content {
-            padding: 2rem;
+            padding: 20px;
         }
-        .content-header {
-            background-color: #e6f2ff;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
+        .content .content-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #e0e0e0;
+            transition: box-shadow 0.3s;
         }
-        .filter-buttons .btn {
-            margin-right: 10px;
+        .content .content-item:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-        .card {
-            margin-bottom: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        .content .content-item:last-child {
+            height: 300px; /* Adjust the height as needed */
         }
-        .card img {
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
+        /* hero section */
+        .custom-rounded-box {
+            border-radius: 10px;
+            background-color: #d3d3d3;
+            padding: 0;
+            text-align: center;
+            margin-bottom: 20px;
+            height: 300px;
+            overflow: hidden;
+            position: relative;
         }
-        .card-body {
-            padding: 1rem;
-        }
-        .progress {
-            height: 5px;
-            background-color: #e0e0e0;
-        }
-        .progress-bar {
-            background-color: #007bff;
-        }
-        .whatsapp-icon {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #25d366;
-            color: #fff;
+         /* Styling for the back icon */
+         .custom-back-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
             border-radius: 50%;
-            padding: 15px;
-            font-size: 24px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            cursor: pointer;
         }
-  </style>
- </head>
- <body>
-  <nav class="navbar navbar-expand-lg navbar-light">
-   <a class="navbar-brand" href="#">
-    <img alt="Logo" height="40" src="https://placehold.co/40x40" width="40"/>
-   </a>
-   <div class="collapse navbar-collapse">
-    <form class="d-flex mx-auto search-bar">
-     <input aria-label="Search" class="form-control me-2" placeholder="Ingin bantu siapa hari ini?" type="search"/>
-    </form>
-    <div class="btn-group">
-     <button class="btn btn-primary">
-      Bantu Pasien
-     </button>
-     <button class="btn btn-success">
-      Bantu Inisiatif
-     </button>
-     <button class="btn btn-warning">
-      Campaign pilihan
-     </button>
-     <button class="btn btn-danger">
-      Donasi Rutin
-     </button>
-    </div>
-   </div>
-  </nav>
-  <div class="content">
-   <div class="content-header text-center">
-    <h2>
-     Donasi Pasien
-    </h2>
-    <p>
-     Salurkan bantuan anda, bantu kesembuhan para pasien ini dengan menyumbang mulai dari Rp 1.000
-    </p>
-   </div>
-   <div class="d-flex justify-content-between align-items-center mb-3">
-    <button class="btn btn-outline-primary">
-     Urutkan
-    </button>
-    <div class="filter-buttons">
-     <button class="btn btn-outline-primary">
-      Semua
-     </button>
-     <button class="btn btn-outline-primary">
-      Kanker
-     </button>
-     <button class="btn btn-outline-primary">
-      Hidrosefalus
-     </button>
-     <button class="btn btn-outline-primary">
-      Tumor
-     </button>
-     <button class="btn btn-outline-primary">
-      Leukemia
-     </button>
-     <button class="btn btn-outline-primary">
-      Jantung Bocor
-     </button>
-    </div>
-   </div>
-   <div class="card">
-    <div class="row g-0">
-     <div class="col-md-4">
-      <img alt="Patient in hospital bed" class="img-fluid" height="150" src="https://placehold.co/150x150" width="150"/>
-     </div>
-     <div class="col-md-8">
-      <div class="card-body">
-       <h5 class="card-title">
-        Harus Cuci Darah Demi Bertahan Hidup, Junior Butuh Pertolonganmu!
-       </h5>
-       <p class="card-text">
-        <small class="text-muted">
-         Siti maryam
-        </small>
-       </p>
-       <div class="progress mb-2">
-        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="50" class="progress-bar" role="progressbar" style="width: 50%;">
+        @media (max-width: 768px) {
+            .navbar .logo, .navbar .menu-icon {
+                width: 50px;
+                height: 50px;
+            }
+            .navbar .search-bar {
+                margin: 0;
+            }
+            .categories {
+                overflow-x: auto;
+            }
+            /* hero section */
+        .custom-rounded-box {
+            border-radius: 10px;
+            background-color: #d3d3d3;
+            padding: 0;
+            text-align: center;
+            margin-bottom: 20px;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+         /* Styling for the back icon */
+         .custom-back-icon {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            padding: 10px;
+            cursor: pointer;
+        }
+        }
+    </style>
+</head>
+<body>
+    <div class="container container-custom">
+        <!-- Navbar -->
+        <div class="navbar d-flex align-items-center">
+            <div class="logo">logo</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search" id="search-input">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <div class="menu-icon" id="menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="dropdown-menu-custom" id="dropdown-menu">
+                <a href="./../../../aplikasi-manajemen-donasi/view/layouts/pilihan_lainnya/pilihan_lainnya.php">Campaign Pilihan</a>
+                <a href="#">Shop & Donate</a>
+                <a href="#">Donasi Rutin</a>
+                <a href="#">Tentang Kami</a>
+                <a href="#">FAQ</a>
+                <a href="#">Kebijakan Privasi</a>
+            </div>
         </div>
-       </div>
-       <p class="card-text">
-        Rp 156.000
-       </p>
-       <p class="card-text">
-        <small class="text-muted">
-         2 Donatur
-        </small>
-       </p>
-       <p class="card-text">
-        <small class="text-muted">
-         58 hari lagi
-        </small>
-       </p>
-      </div>
-     </div>
-    </div>
-   </div>
-   <div class="card">
-    <div class="row g-0">
-     <div class="col-md-4">
-      <img alt="Patient with burn injuries" class="img-fluid" height="150" src="https://placehold.co/150x150" width="150"/>
-     </div>
-     <div class="col-md-8">
-      <div class="card-body">
-       <h5 class="card-title">
-        Alami Luka Bakar akibat Gas Meledak, Pak Raja Membutuh Pertolonganmu Segera!
-       </h5>
-       <p class="card-text">
-        <small class="text-muted">
-         Yuli
-        </small>
-       </p>
-       <div class="progress mb-2">
-        <div aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" class="progress-bar" role="progressbar" style="width: 30%;">
+        <!-- hero section -->
+        <div class="custom-rounded-box">
+        <a class="custom-back-icon" href="../../../index.php">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+            <img alt="Placeholder image" class="img-fluid h-100 w-100" height="300" src="https://img.freepik.com/free-photo/painting-mountain-lake-with-mountain-background_188544-9126.jpg" width="600"/>
         </div>
-       </div>
-       <p class="card-text">
-        Rp 156.000
-       </p>
-       <p class="card-text">
-        <small class="text-muted">
-         2 Donatur
-        </small>
-       </p>
-       <p class="card-text">
-        <small class="text-muted">
-         58 hari lagi
-        </small>
-       </p>
-      </div>
-     </div>
+        <!-- Categories -->
+        <div class="categories d-flex">
+            <div class="category" onclick="categoryClick(this, 'semua')">semua</div>
+            <div class="category" onclick="categoryClick(this, 'campaign')">campaign</div>
+            <div class="category" onclick="categoryClick(this, 'kesehatan')">kesehatan</div>
+            <div class="category" onclick="categoryClick(this, 'shop & donate')">shop & donate</div>
+        </div>
+        <!-- Content -->
+        <div class="content">
+            <div class="content-item"></div>
+            <div class="content-item"></div>
+            <div class="content-item"></div>
+        </div>
     </div>
-   </div>
-  </div>
-  <a class="whatsapp-icon" href="#">
-   <i class="fab fa-whatsapp">
-   </i>
-  </a>
- </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+        document.getElementById('search-input').addEventListener('focus', function() {
+            this.style.borderColor = '#007bff';
+            this.style.boxShadow = '0 0 5px rgba(0, 123, 255, 0.5)';
+        });
+
+        document.getElementById('search-input').addEventListener('blur', function() {
+            this.style.borderColor = '#ccc';
+            this.style.boxShadow = 'none';
+        });
+
+        document.getElementById('menu-icon').addEventListener('click', function() {
+            var dropdownMenu = document.getElementById('dropdown-menu');
+            if (dropdownMenu.classList.contains('show')) {
+                dropdownMenu.classList.remove('show');
+            } else {
+                dropdownMenu.classList.add('show');
+            }
+        });
+
+        function categoryClick(element, category) {
+            // Remove active class from all categories
+            var categories = document.querySelectorAll('.category');
+            categories.forEach(function(cat) {
+                cat.classList.remove('active');
+                cat.style.backgroundColor = '#ffffff';
+                cat.style.color = '#8bc34a';
+            });
+
+            // Add active class to the clicked category
+            element.classList.add('active');
+            element.style.backgroundColor = '#8bc34a';
+            element.style.color = '#ffffff';
+
+            alert(category + ' clicked!');
+        }
+    </script>
+</body>
 </html>

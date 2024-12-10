@@ -23,10 +23,12 @@ $result_pilihan = $conn->query($query_pilihan);
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Style CSS -->
     <link href="../aplikasi-manajemen-donasi/assets/design/style.css" rel="stylesheet">
-    <link href="../aplikasi-manajemen-donasi/assets/partials_css/navbar.css" rel="stylesheet">
-    <link href="../aplikasi-manajemen-donasi/assets/layouts_css/tampilan_css/hero_section.css" rel="stylesheet">
-    <link href="../aplikasi-manajemen-donasi/assets/layouts_css/tampilan_css/icon_section.css" rel="stylesheet">
-    <link href="../aplikasi-manajemen-donasi/assets/layouts_css/tampilan_css/footer.css" rel="stylesheet">
+    <link href="../aplikasi-manajemen-donasi/assets/design/navbar.css" rel="stylesheet">
+    <link href="../aplikasi-manajemen-donasi/assets/design/hero_section.css" rel="stylesheet">
+    <link href="../aplikasi-manajemen-donasi/assets/design/campaig_pasien.css" rel="stylesheet">
+    <link href="../aplikasi-manajemen-donasi/assets/design/icon_section.css" rel="stylesheet">
+    <link href="../aplikasi-manajemen-donasi/assets/design/footer.css" rel="stylesheet">
+    <link href="../../../assets/user_css/detail_donation.css" rel="stylesheet"/>
 </head>
 <style>
     .card-img-top {
@@ -60,7 +62,7 @@ $result_pilihan = $conn->query($query_pilihan);
             <?php while ($row = $result_darurat->fetch_assoc()): ?>
                 <div class="col-md-4 mb-4">
                     <!-- Tambahkan tautan di seluruh card -->
-                    <a href="../aplikasi-manajemen-donasi/view/user/detil_donation.php?id=<?php echo $row['id']; ?>" class="text-decoration-none text-dark">
+                    <a href="./detil_donation_index.php?id=<?php echo $row['id']; ?>" class="text-decoration-none text-dark">
                         <div class="card">
                             <img alt="Campaign Image" class="card-img-top" src="../aplikasi-manajemen-donasi/uploads/<?php echo htmlspecialchars($row['image']); ?>" />
                             <div class="card-body">
@@ -112,7 +114,7 @@ $result_pilihan = $conn->query($query_pilihan);
             <?php while ($row = $result_pilihan->fetch_assoc()): ?>
                 <div class="col-md-4 mb-4">
                     <!-- Tambahkan tautan di seluruh card -->
-                    <a href="../aplikasi-manajemen-donasi/view/user/detil_donation.php?id=<?php echo $row['id']; ?>" class="text-decoration-none text-dark">
+                    <a href="./detil_donation_index.php?id=<?php echo $row['id']; ?>" class="text-decoration-none text-dark">
                         <div class="card">
                             <img alt="Campaign Image" class="card-img-top" src="../aplikasi-manajemen-donasi/uploads/<?php echo htmlspecialchars($row['image']); ?>" />
                             <div class="card-body">
@@ -155,6 +157,11 @@ $result_pilihan = $conn->query($query_pilihan);
             </div>
         </div>
     </div>
+
+    <!-- WhatsApp Icon -->
+    <a class="whatsapp-icon" href="#">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <!-- Footer -->
     <div>

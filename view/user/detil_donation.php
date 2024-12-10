@@ -2,9 +2,6 @@
 // Cek apakah pengguna sudah login
 session_start();
 
-// Mengambil data dari session jika ada
-$is_logged_in = isset($_SESSION['user_id']);  // Asumsi 'user_id' disimpan di session setelah login
-
 // Koneksi ke database dan query kampanye tetap berjalan
 require_once '../../config/db.php';
 
@@ -43,7 +40,7 @@ if (!$campaign) {
     rel="stylesheet"
   />
   <link
-    href="./../../../../../aplikasi-manajemen-donasi/assets/donation_section/campaign_pasien/cp.css"
+    href="../../assets/user_css/detail_donation.css"
     rel="stylesheet"
   />
 </head>
@@ -56,8 +53,8 @@ if (!$campaign) {
         src="../../uploads/<?php echo htmlspecialchars($campaign['image']); ?>"
         width="600"
       />
-      <!-- Tombol Back dengan kondisi login -->
-      <a class="back-button" href="<?php echo $is_logged_in ? '../user/dashboard.php' : '../../index.php'; ?>">
+      <!-- Tombol Back -->
+      <a class="back-button" href="../user/dashboard.php">
         <i class="fas fa-arrow-left"></i>
       </a>
       <div class="user-info">
@@ -123,17 +120,9 @@ if (!$campaign) {
 
       <!-- Tombol Donasikan dan Bagikan -->
       <div class="action-buttons text-center mt-4">
-        <?php if (!$is_logged_in): ?>
-          <!-- Jika belum login, arahkan ke halaman login -->
-          <a href="../pages/login.php" class="btn btn-primary btn-lg me-2">
-            <i class="fas fa-donate"></i> Donasikan
-          </a>
-        <?php else: ?>
-          <!-- Jika sudah login, arahkan ke halaman pembayaran -->
-          <a href="../layouts/pembayaran/pembayaran.php?id=<?php echo $campaign['id']; ?>" class="btn btn-primary btn-lg me-2">
-            <i class="fas fa-donate"></i> Donasikan
-          </a>
-        <?php endif; ?>
+        <a href="../layouts/pembayaran/pembayaran.php?id=<?php echo $campaign['id']; ?>" class="btn btn-primary btn-lg me-2">
+          <i class="fas fa-donate"></i> Donasikan
+        </a>
         <a href="#" class="btn btn-secondary btn-lg">
           <i class="fas fa-share"></i> Bagikan
         </a>
