@@ -3,7 +3,7 @@
 session_start();
 
 // Koneksi ke database dan query kampanye tetap berjalan
-require_once '../../config/db.php';
+require_once './config/db.php';
 
 $id = $_GET['id'] ?? null;
 
@@ -50,11 +50,11 @@ if (!$campaign) {
       <img
         alt="Gambar Kampanye"
         height="300"
-        src="../../uploads/<?php echo htmlspecialchars($campaign['image']); ?>"
+        src="./uploads/<?php echo htmlspecialchars($campaign['image']); ?>"
         width="600"
       />
       <!-- Tombol Back -->
-      <a class="back-button" href="../user/dashboard.php">
+      <a class="back-button" href="./index.php">
         <i class="fas fa-arrow-left"></i>
       </a>
       <div class="user-info">
@@ -120,7 +120,7 @@ if (!$campaign) {
 
       <!-- Tombol Donasikan dan Bagikan -->
       <div class="action-buttons text-center mt-4">
-        <a href="../layouts/pembayaran/pembayaran.php?id=<?php echo $campaign['id']; ?>" class="btn btn-primary btn-lg me-2">
+        <a href="./view/pages/login.php?id=<?php echo $campaign['id']; ?>" class="btn btn-primary btn-lg me-2">
           <i class="fas fa-donate"></i> Donasikan
         </a>
         <a href="#" class="btn btn-secondary btn-lg">

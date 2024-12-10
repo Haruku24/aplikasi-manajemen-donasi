@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../config/db.php";
+require "../config/db.php";
 
 $email = "";
 $password = "";

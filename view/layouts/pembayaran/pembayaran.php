@@ -271,7 +271,6 @@
                 <div class="slider-label" id="slider-label">10%</div>
                 <input type="range" min="0" max="100" value="10" id="donation-slider">
                 <div class="d-flex justify-content-between">
-                    <span>0%</span>
                     <span>100%</span>
                 </div>
             </div>

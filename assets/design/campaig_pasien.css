@@ -1,0 +1,6 @@
+.card-img-top {
+    width: 100%; /* Memastikan gambar memenuhi lebar kartu */
+    height: 200px; /* Atur tinggi gambar */
+    object-fit: cover; /* Memotong gambar secara proporsional */
+    border-radius: 4px; /* Opsional: Tambahkan efek melengkung */
+}

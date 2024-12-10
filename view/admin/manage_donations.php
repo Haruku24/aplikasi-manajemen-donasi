@@ -2,19 +2,26 @@
 ob_start(); // Memulai output buffering
 
 // Koneksi ke database
-require_once '../../config/db.php';
+require_once '../../config/db.php'; // Pastikan file db.php sudah ada dan berisi koneksi database
 
 // Handle delete request
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
     $delete_stmt = $conn->prepare("DELETE FROM manage_donations WHERE id = ?");
     $delete_stmt->bind_param("i", $delete_id);
-    $delete_stmt->execute();
-    header("Location: manage_donations.php");
-    exit();
+    if ($delete_stmt->execute()) {
+        // Penghapusan berhasil, redirect dengan pesan sukses
+        header("Location: manage_donations.php?delete_success=true");
+        exit();
+    } else {
+        // Penghapusan gagal
+        header("Location: manage_donations.php?delete_success=false");
+        exit();
+    }
 }
 
 // Handle form submission
+$donation_added = false; // Variabel untuk menandakan apakah donasi berhasil ditambahkan
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $description = $_POST['description'];
     $target_amount = str_replace('.', '', $_POST['target_amount']);
@@ -34,8 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt = $conn->prepare("INSERT INTO manage_donations (image, description, target_amount, deadline, status_donation, donator_name) VALUES (?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("ssssss", $image, $description, $target_amount, $deadline, $status_donation, $donator_name);
             $stmt->execute();
-            header("Location: manage_donations.php");
-            exit();
+            $donation_added = true; // Set donation_added ke true jika berhasil
         }
     } else {
         echo "<script>alert('File tidak valid! Pastikan file gambar maksimal 3MB dan dalam format PNG, JPEG, atau JPG.');</script>";
@@ -55,12 +61,36 @@ ob_end_flush(); // Mengakhiri output buffering
     <link rel="stylesheet" href="../../assets/design/managedonations.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <?php include 'sidebar.php'; ?>
     <div class="main-content" id="mainContent">
         <div class="container">
             <h2 class="my-4">Manage Donations</h2>
+
+            <!-- Menampilkan Pesan Sukses atau Gagal Penghapusan -->
+            <?php if (isset($_GET['delete_success'])): ?>
+                <script>
+                    Swal.fire({
+                        title: '<?php echo ($_GET['delete_success'] == 'true') ? 'Deleted Successfully!' : 'Failed to Delete!'; ?>',
+                        icon: '<?php echo ($_GET['delete_success'] == 'true') ? 'success' : 'error'; ?>',
+                        confirmButtonText: 'OK'
+                    });
+                </script>
+            <?php endif; ?>
+
+            <!-- Menampilkan Pesan Sukses setelah Add Donation -->
+            <?php if ($donation_added): ?>
+                <script>
+                    Swal.fire({
+                        title: 'Donation Added Successfully!',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
+                </script>
+            <?php endif; ?>
 
             <!-- Form Tambah Donasi -->
             <form action="manage_donations.php" method="POST" enctype="multipart/form-data" class="mb-4">
@@ -115,23 +145,28 @@ ob_end_flush(); // Mengakhiri output buffering
                     </thead>
                     <tbody>
                         <?php
-                        $result = $conn->query("SELECT * FROM manage_donations ORDER BY id ASC");
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>" . htmlspecialchars($row['id']) . "</td>";
-                            echo "<td><img src='../../uploads/{$row['image']}' width='100' class='img-thumbnail'></td>";
-                            echo "<td>" . htmlspecialchars($row['description']) . "</td>";
-                            echo "<td>Rp. " . number_format($row['target_amount'], 0, ',', '.') . "</td>";
-                            echo "<td>Rp. " . number_format($row['collected_amount'], 0, ',', '.') . "</td>";
-                            echo "<td>" . htmlspecialchars($row['donator_name']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['deadline']) . "</td>";
-                            echo "<td>" . ucfirst(htmlspecialchars($row['status_donation'])) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['created_at']) . "</td>";
-                            echo "<td>
-                                    <a href='edit_donation.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
-                                    <button class='btn btn-danger btn-sm' data-id='{$row['id']}' onclick='confirmDelete({$row['id']})'>Delete</button>
-                                 </td>";
-                            echo "</tr>";
+                        // Pastikan koneksi ke database sudah benar
+                        if ($conn) {
+                            $result = $conn->query("SELECT * FROM manage_donations ORDER BY id ASC");
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . htmlspecialchars($row['id']) . "</td>";
+                                echo "<td><img src='../../uploads/{$row['image']}' width='100' class='img-thumbnail'></td>";
+                                echo "<td>" . htmlspecialchars($row['description']) . "</td>";
+                                echo "<td>Rp. " . number_format($row['target_amount'], 0, ',', '.') . "</td>";
+                                echo "<td>Rp. " . number_format($row['collected_amount'], 0, ',', '.') . "</td>";
+                                echo "<td>" . htmlspecialchars($row['donator_name']) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['deadline']) . "</td>";
+                                echo "<td>" . ucfirst(htmlspecialchars($row['status_donation'])) . "</td>";
+                                echo "<td>" . htmlspecialchars($row['created_at']) . "</td>";
+                                echo "<td>
+                                        <a href='edit_donation.php?id={$row['id']}' class='btn btn-warning btn-sm'>Edit</a>
+                                        <button class='btn btn-danger btn-sm' data-id='{$row['id']}' onclick='confirmDelete({$row['id']})'>Delete</button>
+                                     </td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='10'>Database connection failed!</td></tr>";
                         }
                         ?>
                     </tbody>
@@ -146,9 +181,19 @@ ob_end_flush(); // Mengakhiri output buffering
         });
 
         function confirmDelete(id) {
-            if (confirm("Are you sure you want to delete this donation?")) {
-                window.location.href = 'manage_donations.php?delete_id=' + id;
-            }
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'manage_donations.php?delete_id=' + id;
+                }
+            });
         }
     </script>
 </body>
